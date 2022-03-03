@@ -29,7 +29,9 @@ class _NewsPageState extends State<NewsPage> {
         builder: (context, notifier, child) {
           if (notifier.isLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                key: Key('progress-indicator'),
+              ),
             );
           }
           return ListView.builder(
