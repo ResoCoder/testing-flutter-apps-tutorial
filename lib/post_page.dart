@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_testing_tutorial/article.dart';
+import 'package:flutter_testing_tutorial/post.dart';
 
-class ArticlePage extends StatelessWidget {
-  final Article article;
+class PostPage extends StatelessWidget {
+  final Post post;
 
-  const ArticlePage({
-    required this.article,
+  const PostPage({
+    required this.post,
     Key? key,
   }) : super(key: key);
 
@@ -23,11 +23,11 @@ class ArticlePage extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              article.title,
+              post.title,
               style: Theme.of(context).textTheme.headline5,
             ),
             const SizedBox(height: 8),
-            Text(article.content),
+            Text(post.content),
           ],
         ),
       ),

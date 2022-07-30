@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_testing_tutorial/article_page.dart';
-import 'package:flutter_testing_tutorial/news_change_notifier.dart';
+import 'package:flutter_testing_tutorial/post_page.dart';
+import 'package:flutter_testing_tutorial/story_change_notifier.dart';
 
-class NewsPage extends StatefulWidget {
-  const NewsPage({Key? key}) : super(key: key);
+class StoryPage extends StatefulWidget {
+  const StoryPage({Key? key}) : super(key: key);
 
   @override
-  State<NewsPage> createState() => _NewsPageState();
+  State<StoryPage> createState() => _StoryPageState();
 }
 
-class _NewsPageState extends State<NewsPage> {
+class _StoryPageState extends State<StoryPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(
-      () => context.read<NewsChangeNotifier>().getArticles(),
+      () => context.read<StoryChangeNotifier>().getPosts(),
     );
   }
 
@@ -23,9 +23,9 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('News'),
+        title: const Text('Story Time'),
       ),
-      body: Consumer<NewsChangeNotifier>(
+      body: Consumer<StoryChangeNotifier>(
         builder: (context, notifier, child) {
           if (notifier.isLoading) {
             return const Center(
@@ -33,23 +33,23 @@ class _NewsPageState extends State<NewsPage> {
             );
           }
           return ListView.builder(
-            itemCount: notifier.articles.length,
+            itemCount: notifier.posts.length,
             itemBuilder: (_, index) {
-              final article = notifier.articles[index];
+              final post = notifier.posts[index];
               return Card(
                 elevation: 2,
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (_) => ArticlePage(article: article),
+                        builder: (_) => PostPage(post: post),
                       ),
                     );
                   },
                   child: ListTile(
-                    title: Text(article.title),
+                    title: Text(post.title),
                     subtitle: Text(
-                      article.content,
+                      post.content,
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),
