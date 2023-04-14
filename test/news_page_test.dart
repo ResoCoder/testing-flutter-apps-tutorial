@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_testing_tutorial/article.dart';
-import 'package:flutter_testing_tutorial/main.dart';
 import 'package:flutter_testing_tutorial/news_change_notifier.dart';
 import 'package:flutter_testing_tutorial/news_page.dart';
 import 'package:flutter_testing_tutorial/news_service.dart';
@@ -43,7 +42,7 @@ void main() {
       title: 'News App',
       home: ChangeNotifierProvider(
         create: (_) => NewsChangeNotifier(mockNewsService),
-        child: NewsPage(),
+        child: const NewsPage(),
       ),
     );
   }
@@ -65,7 +64,7 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pump(const Duration(milliseconds: 500));
 
-      expect(find.byKey(Key('progress-indicator')), findsOneWidget);
+      expect(find.byKey(const Key('progress-indicator')), findsOneWidget);
 
       await tester.pumpAndSettle();
     },
